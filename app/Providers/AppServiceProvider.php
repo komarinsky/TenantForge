@@ -33,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Date::use(CarbonImmutable::class);
 
+        config(['session.connection' => config('tenancy.database.central_connection')]);
+
         DB::prohibitDestructiveCommands(
             app()->isProduction(),
         );

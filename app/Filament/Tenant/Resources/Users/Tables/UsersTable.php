@@ -1,36 +1,27 @@
 <?php
 
-namespace App\Filament\Resources\Tenants\Tables;
+namespace App\Filament\Tenant\Resources\Users\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
-class TenantsTable
+class UsersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Name')
-                    ->searchable(query: fn (Builder $query, string $search): Builder => $query->where('data->name', 'like', "%{$search}%"))
-                    ->sortable(query: fn (Builder $query, string $direction): Builder => $query->orderBy('data->name', $direction)),
-                TextColumn::make('id')
-                    ->label('ID')
-                    ->badge()
-                    ->copyable()
                     ->searchable()
-                    ->toggleable(),
-                TextColumn::make('domains.domain')
-                    ->label('Domains')
-                    ->badge()
-                    ->placeholder('—'),
+                    ->sortable(),
+                TextColumn::make('email')
+                    ->label('Email / login')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('created_at')
-                    ->label('Created')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
