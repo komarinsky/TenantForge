@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Tenants\Pages;
 
 use App\Filament\Resources\Tenants\TenantResource;
+use App\Models\Post;
 use App\Models\User;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -27,6 +28,10 @@ class CreateTenant extends CreateRecord
 
     protected function afterCreate(): void
     {
-        $this->record->run(fn () => User::create($this->adminData));
+        $this->record->run(function (): void {
+            User::create($this->adminData);
+
+            Post::factory()->count(3)->create();
+        });
     }
 }

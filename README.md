@@ -1,4 +1,4 @@
-<h1 align="center">TenantForge</h1>
+1<h1 align="center">TenantForge</h1>
 
 <p align="center">
   <strong>Production-ready multi-tenant SaaS boilerplate for Laravel.</strong><br>
