@@ -4,6 +4,7 @@ namespace App\Filament\Tenant\Resources\Posts\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -32,6 +33,10 @@ class PostForm
                 Textarea::make('excerpt')
                     ->rows(3)
                     ->maxLength(500),
+                SpatieMediaLibraryFileUpload::make('featured_image')
+                    ->collection('featured_image')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->imageEditor(),
                 RichEditor::make('body')
                     ->required()
                     ->columnSpanFull(),
