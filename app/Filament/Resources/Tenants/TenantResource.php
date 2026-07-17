@@ -5,10 +5,12 @@ namespace App\Filament\Resources\Tenants;
 use App\Filament\Resources\Tenants\Pages\CreateTenant;
 use App\Filament\Resources\Tenants\Pages\EditTenant;
 use App\Filament\Resources\Tenants\Pages\ListTenants;
+use App\Filament\Resources\Tenants\Pages\ManageTenantUsers;
 use App\Filament\Resources\Tenants\Schemas\TenantForm;
 use App\Filament\Resources\Tenants\Tables\TenantsTable;
 use App\Models\Tenant;
 use BackedEnum;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -45,6 +47,15 @@ class TenantResource extends Resource
             'index' => ListTenants::route('/'),
             'create' => CreateTenant::route('/create'),
             'edit' => EditTenant::route('/{record}/edit'),
+            'users' => ManageTenantUsers::route('/{record}/users'),
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            EditTenant::class,
+            ManageTenantUsers::class,
+        ]);
     }
 }
